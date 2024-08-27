@@ -26,9 +26,11 @@ export const file_write = async (req, res) => {
 
   fs.writeFile(filePath, "hello world.", (err) => {
     if (err) {
-      console.error("Error writing file:", err);
-      return res.status(500).send("An error occurred while writing the file.");
+      res.write("An error occurred while writing the file.");
+      res.end(); // End the response manually
+      return;
     }
-    res.send("File 'demo.txt' has been saved successfully.");
+    res.write("File 'demo.txt' has been saved successfully.");
+    res.end(); // End the response manually
   });
 };
